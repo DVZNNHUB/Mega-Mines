@@ -13,34 +13,21 @@
     <div id="loadingScreen" class="loading-screen">
         <div class="loader"></div>
         <h2>Carregando Mega Mines...</h2>
-        <img src="images/mines_table_3d.jpg" alt="Mines Game 3D Table" class="loading-image">
     </div>
 
-    <div class="container">
-        <!-- Tela de Introdução -->
-        <div class="intro">
-            <h1 class="title">Bem-vindo ao Mega Mines</h1>
-            <p class="description">Escolha o número de minas e arrisque! Quanto mais minas, maior o prêmio!</p>
-            <div class="mines-options">
-                <button class="mineOption" data-mines="3">3 Minas</button>
-                <button class="mineOption" data-mines="4">4 Minas</button>
-                <button class="mineOption" data-mines="5">5 Minas</button>
-                <button class="mineOption" data-mines="6">6 Minas</button>
-            </div>
-            <button id="startGameBtn">Iniciar Jogo</button>
+    <!-- Tela do Jogo -->
+    <div class="game" style="display: none;">
+        <h1>Mega Mines</h1>
+        
+        <!-- Botões de Controle -->
+        <div class="controls">
+            <button id="increaseBet" class="button">Aumentar Aposta</button>
+            <button id="decreaseBet" class="button">Diminuir Aposta</button>
+            <button id="cashOutBtn" class="button">Sacar Dinheiro</button>
         </div>
 
-        <!-- Tela do Jogo -->
-        <div class="game" style="display: none;">
-            <div class="controls">
-                <button id="increaseBet">Aumentar Aposta</button>
-                <button id="decreaseBet">Diminuir Aposta</button>
-                <button id="cashOutBtn" style="display: none;">Sacar Dinheiro</button>
-            </div>
-            <h2>Escolha as células, encontre as minas e ganhe!</h2>
-            <div class="grid"></div>
-            <p class="multiplier">Multiplicador: <span id="multiplier">1x</span></p>
-        </div>
+        <div id="gameBoard"></div>
+        <button id="startGame" class="button">Iniciar Jogo</button>
     </div>
 
     <script src="script.js"></script>
