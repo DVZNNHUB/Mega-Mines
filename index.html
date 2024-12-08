@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mega Mines</title>
-    <!-- Fonte Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -14,6 +13,7 @@
     <div id="loadingScreen" class="loading-screen">
         <div class="loader"></div>
         <h2>Carregando Mega Mines...</h2>
+        <img src="images/mines_table_3d.jpg" alt="Mines Game 3D Table" class="loading-image">
     </div>
 
     <div class="container">
@@ -32,10 +32,14 @@
 
         <!-- Tela do Jogo -->
         <div class="game" style="display: none;">
+            <div class="controls">
+                <button id="increaseBet">Aumentar Aposta</button>
+                <button id="decreaseBet">Diminuir Aposta</button>
+                <button id="cashOutBtn" style="display: none;">Sacar Dinheiro</button>
+            </div>
             <h2>Escolha as células, encontre as minas e ganhe!</h2>
             <div class="grid"></div>
             <p class="multiplier">Multiplicador: <span id="multiplier">1x</span></p>
-            <button id="cashOutBtn" style="display: none;">Sacar Dinheiro</button>
         </div>
     </div>
 
