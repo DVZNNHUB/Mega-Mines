@@ -1,78 +1,123 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 body {
     font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.container {
     text-align: center;
-    background-color: #f0f0f0;
 }
 
-header {
-    background-color: #007bff;
+button {
+    background-color: #4CAF50;
     color: white;
-    padding: 20px;
-    font-size: 24px;
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
 }
 
-#game-board {
-    margin: 30px 0;
+button:hover {
+    background-color: #45a049;
+}
+
+.intro h1 {
+    font-size: 2rem;
+    opacity: 0;
+    animation: fadeIn 2s forwards;
+}
+
+.game h2 {
+    margin-top: 20px;
+    opacity: 0;
+    animation: fadeIn 2s forwards;
+}
+
+.mines-options button {
+    padding: 10px;
+    margin: 5px;
+    transition: transform 0.2s ease;
+}
+
+.mines-options button:hover {
+    transform: scale(1.1);
 }
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(5, 50px);
-    grid-gap: 10px;
-    justify-content: center;
-    margin-bottom: 20px;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 5px;
+    margin-top: 20px;
+    transition: opacity 0.5s ease;
 }
 
-.grid button {
+.grid div {
     width: 50px;
     height: 50px;
-    font-size: 18px;
     background-color: #fff;
-    border: 2px solid #007bff;
+    border: 1px solid #ccc;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.grid button:hover {
-    background-color: #e0e0e0;
+.grid div.revealed {
+    background-color: #f0f0f0;
+    transform: scale(0.95);
 }
 
-button:active {
-    transform: scale(0.98);
-}
-
-.mine {
+.grid div.mine {
     background-color: red;
-    color: white;
+    transform: scale(1.2);
+    animation: explode 0.5s ease forwards;
 }
 
-.safe {
-    background-color: #28a745;
-    color: white;
+.grid div.safe {
+    background-color: green;
 }
 
-#statusMessage {
-    font-size: 18px;
+.gameArea {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#cashOutBtn {
     margin-top: 20px;
-    font-weight: bold;
+    opacity: 0;
+    animation: fadeIn 2s forwards;
 }
 
-#prediction {
-    margin-top: 20px;
-    font-size: 18px;
+/* Animação de transição suave para o conteúdo */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
-footer {
-    background-color: #007bff;
-    color: white;
-    padding: 10px;
-    position: fixed;
-    width: 100%;
-    bottom: 0;
+/* Animação de explosão para as minas */
+@keyframes explode {
+    0% {
+        transform: scale(1.2);
+        background-color: red;
+    }
+    50% {
+        transform: scale(1.4);
+        background-color: orange;
+    }
+    100% {
+        transform: scale(1.6);
+        background-color: yellow;
+        background-color: #ff0000;
+    }
 }
