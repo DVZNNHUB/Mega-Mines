@@ -4,15 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mega Mines</title>
+    <!-- Fonte Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+    <!-- Tela de Carregamento -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loader"></div>
+        <h2>Carregando Mega Mines...</h2>
+    </div>
+
     <div class="container">
-        <!-- Tela de introdução -->
+        <!-- Tela de Introdução -->
         <div class="intro">
-            <h1>Bem-vindo ao Mega Mines</h1>
-            <p>Escolha o número de minas e arrisque! Quanto mais minas, maior o prêmio!</p>
+            <h1 class="title">Bem-vindo ao Mega Mines</h1>
+            <p class="description">Escolha o número de minas e arrisque! Quanto mais minas, maior o prêmio!</p>
             <div class="mines-options">
                 <button class="mineOption" data-mines="3">3 Minas</button>
                 <button class="mineOption" data-mines="4">4 Minas</button>
@@ -26,7 +34,7 @@
         <div class="game" style="display: none;">
             <h2>Escolha as células, encontre as minas e ganhe!</h2>
             <div class="grid"></div>
-            <p>Multiplicador: <span id="multiplier">1x</span></p>
+            <p class="multiplier">Multiplicador: <span id="multiplier">1x</span></p>
             <button id="cashOutBtn" style="display: none;">Sacar Dinheiro</button>
         </div>
     </div>
