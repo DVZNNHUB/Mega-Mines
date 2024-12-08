@@ -3,30 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mega Mines - Jogo de Cassino</title>
+    <title>Mega Mines</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>Mega Mines</h1>
-        <p>Desafie a sorte e evite as minas!</p>
-    </header>
 
-    <section id="game-board">
-        <h2>Tabuleiro de Jogo</h2>
-        <div class="grid" id="gameGrid"></div>
-        <button id="startGame" onclick="startGame()">Iniciar Jogo</button>
-        <div id="statusMessage"></div>
-    </section>
+    <div class="container">
+        <!-- Tela de introdução -->
+        <div class="intro">
+            <h1>Bem-vindo ao Mega Mines</h1>
+            <p>Escolha o número de minas e arrisque! Quanto mais minas, maior o prêmio!</p>
+            <div class="mines-options">
+                <button class="mineOption" data-mines="3">3 Minas</button>
+                <button class="mineOption" data-mines="4">4 Minas</button>
+                <button class="mineOption" data-mines="5">5 Minas</button>
+                <button class="mineOption" data-mines="6">6 Minas</button>
+            </div>
+            <button id="startGameBtn">Iniciar Jogo</button>
+        </div>
 
-    <section id="prediction">
-        <h2>Previsão das Minas</h2>
-        <p id="predictedMine">Clique em "Iniciar Jogo" para começar!</p>
-    </section>
-
-    <footer>
-        <p>&copy; 2024 Mega Mines - Todos os direitos reservados</p>
-    </footer>
+        <!-- Tela do Jogo -->
+        <div class="game" style="display: none;">
+            <h2>Escolha as células, encontre as minas e ganhe!</h2>
+            <div class="grid"></div>
+            <p>Multiplicador: <span id="multiplier">1x</span></p>
+            <button id="cashOutBtn" style="display: none;">Sacar Dinheiro</button>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
