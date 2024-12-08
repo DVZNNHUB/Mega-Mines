@@ -10,7 +10,7 @@ window.onload = () => {
     setTimeout(() => {
         document.getElementById('loadingScreen').style.display = 'none';
         document.querySelector('.intro').style.display = 'block';
-    }, 2000);
+    }, 3000); // A tela de carregamento será exibida por 3 segundos
 };
 
 document.getElementById('startGameBtn').addEventListener('click', startGame);
@@ -34,55 +34,4 @@ function selectMines(event) {
 }
 
 function generateGrid() {
-    const grid = document.querySelector('.grid');
-    grid.innerHTML = '';
-    for (let i = 0; i < totalCells; i++) {
-        const cell = document.createElement('div');
-        cell.addEventListener('click', () => revealCell(cell, i));
-        grid.appendChild(cell);
-    }
-    placeMines();
-    grid.style.opacity = 1;
-}
-
-function placeMines() {
-    const cells = document.querySelectorAll('.grid div');
-    const mineIndices = [];
-
-    while (mineIndices.length < minesSelected) {
-        const randomIndex = Math.floor(Math.random() * totalCells);
-        if (!mineIndices.includes(randomIndex)) {
-            mineIndices.push(randomIndex);
-            cells[randomIndex].classList.add('mine');
-        }
-    }
-}
-
-function revealCell(cell, index) {
-    if (cell.classList.contains('revealed')) return;
-
-    cell.classList.add('revealed');
-    revealedCells++;
-
-    if (cell.classList.contains('mine')) {
-        cell.classList.add('mine');
-        setTimeout(() => {
-            alert(`Você perdeu! Você encontrou uma mina!`);
-            resetGame();
-        }, 500);
-    } else {
-        if (revealedCells === totalCells - minesSelected) {
-            setTimeout(() => {
-                alert(`Você ganhou! Seu prêmio é: ${multiplier * 10} créditos`);
-                resetGame();
-            }, 500);
-        }
-    }
-}
-
-function resetGame() {
-    gameStarted = false;
-    document.querySelector('.game').style.display = 'none';
-    document.querySelector('.intro').style.display = 'block';
-    document.querySelector('.grid').innerHTML = '';
-}
+    const
