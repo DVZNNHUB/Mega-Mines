@@ -1,82 +1,31 @@
-let grid = [];
-let mines = [];
-let stars = [];
-let betAmount = 10;  // Exemplo de aposta inicial
-let currentMultiplier = 1;  // Multiplicador
-let isGameActive = false;
-
-document.getElementById("startGameBtn").addEventListener("click", startGame);
-
-function startGame() {
-    let minesCount = document.querySelector('.mineOption.selected')?.getAttribute('data-mines') || 3;
-    grid = Array(25).fill(null);  // Cria um grid de 25 células (5x5)
-    mines = [];
-    stars = [];
-    isGameActive = true;
-
-    // Adiciona as minas e estrelas ao grid (exemplo de aleatoriedade)
-    for (let i = 0; i < minesCount; i++) {
-        let randIndex = Math.floor(Math.random() * grid.length);
-        if (!mines.includes(randIndex)) {
-            mines.push(randIndex);
+document.addEventListener('DOMContentLoaded', () => {
+    const loadingScreen = document.getElementById('loadingScreen');
+    const gameBoard = document.getElementById('gameBoard');
+    const startButton = document.getElementById('startGame');
+    const gameDiv = document.querySelector('.game');
+    
+    // Exemplo de como criar o tabuleiro de jogo (5x5 por exemplo)
+    function createBoard() {
+        let grid = '';
+        for (let i = 0; i < 5; i++) {
+            for (let j = 0; j < 5; j++) {
+                grid += `<div class="cell" id="cell-${i}-${j}" onclick="revealCell(${i}, ${j})"></div>`;
+            }
         }
+        gameBoard.innerHTML = grid;
     }
 
-    // Adiciona uma estrela em uma posição aleatória
-    let starIndex = Math.floor(Math.random() * grid.length);
-    stars.push(starIndex);
-
-    renderGrid();
-    showGameScreen();
-}
-
-function renderGrid() {
-    const gridContainer = document.querySelector('.grid');
-    gridContainer.innerHTML = '';
-
-    grid.forEach((cell, index) => {
-        let cellDiv = document.createElement('div');
-        cellDiv.dataset.index = index;
-        cellDiv.addEventListener('click', () => handleCellClick(index));
-        gridContainer.appendChild(cellDiv);
+    // Função para iniciar o jogo
+    startButton.addEventListener('click', () => {
+        loadingScreen.style.display = 'none';  // Esconde a tela de carregamento
+        gameDiv.style.display = 'block';  // Mostra a tela do jogo
+        createBoard();  // Cria o tabuleiro de jogo
     });
-}
-
-function handleCellClick(index) {
-    if (!isGameActive) return;
-
-    // Se a célula for uma mina
-    if (mines.includes(index)) {
-        revealAll();
-        alert("Você perdeu! Tente novamente.");
-    } else {
-        // Se a célula for uma estrela
-        if (stars.includes(index)) {
-            currentMultiplier *= 2;
-            document.getElementById("multiplier").innerText = `${currentMultiplier}x`;
-        }
-        document.querySelector(`[data-index='${index}']`).classList.add('revealed');
-    }
-}
-
-function revealAll() {
-    isGameActive = false;
-    // Revela todas as células
-    mines.forEach((mineIndex) => {
-        document.querySelector(`[data-index='${mineIndex}']`).classList.add('mine');
-    });
-    stars.forEach((starIndex) => {
-        document.querySelector(`[data-index='${starIndex}']`).classList.add('star');
-    });
-}
-
-document.getElementById("cashOutBtn").addEventListener("click", () => {
-    alert(`Você sacou ${betAmount * currentMultiplier} moedas!`);
-    isGameActive = false;
-    resetGame();
+    
+    // Função para revelar a célula
+    window.revealCell = (x, y) => {
+        const cell = document.getElementById(`cell-${x}-${y}`);
+        cell.style.backgroundColor = 'lightgray';  // Exemplo de mudança de cor
+        // Aqui você pode adicionar a lógica de "mina" ou "estrela"
+    };
 });
-
-function resetGame() {
-    document.querySelector('.game').style.display = 'none';
-    document.querySelector('.intro').style.display = 'block';
-}
