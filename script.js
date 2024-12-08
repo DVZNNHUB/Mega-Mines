@@ -5,6 +5,14 @@ let gameStarted = false;
 let revealedCells = 0;
 let totalCells = 25; // Grid de 5x5
 
+// Tela de carregamento
+window.onload = () => {
+    setTimeout(() => {
+        document.getElementById('loadingScreen').style.display = 'none';
+        document.querySelector('.intro').style.display = 'block';
+    }, 2000);
+};
+
 document.getElementById('startGameBtn').addEventListener('click', startGame);
 document.querySelectorAll('.mineOption').forEach(button => {
     button.addEventListener('click', selectMines);
@@ -13,28 +21,28 @@ document.querySelectorAll('.mineOption').forEach(button => {
 function startGame() {
     document.querySelector('.intro').style.display = 'none';
     document.querySelector('.game').style.display = 'block';
-    document.querySelector('.grid').style.opacity = 0; // Inicializa invisível
-    setTimeout(generateGrid, 500); // Cria o grid após animação de fade
+    document.querySelector('.grid').style.opacity = 0;
+    setTimeout(generateGrid, 500);
     gameStarted = true;
     revealedCells = 0;
 }
 
 function selectMines(event) {
     minesSelected = parseInt(event.target.dataset.mines);
-    multiplier = (6 - minesSelected); // Mais minas = menor multiplicador
+    multiplier = (6 - minesSelected);
     document.getElementById('multiplier').textContent = `${multiplier}x`;
 }
 
 function generateGrid() {
     const grid = document.querySelector('.grid');
-    grid.innerHTML = ''; // Limpar grid anterior
+    grid.innerHTML = '';
     for (let i = 0; i < totalCells; i++) {
         const cell = document.createElement('div');
         cell.addEventListener('click', () => revealCell(cell, i));
         grid.appendChild(cell);
     }
     placeMines();
-    grid.style.opacity = 1; // Anima o grid após sua criação
+    grid.style.opacity = 1;
 }
 
 function placeMines() {
@@ -51,22 +59,19 @@ function placeMines() {
 }
 
 function revealCell(cell, index) {
-    if (cell.classList.contains('revealed')) return; // Não clicar de novo
+    if (cell.classList.contains('revealed')) return;
 
     cell.classList.add('revealed');
     revealedCells++;
 
     if (cell.classList.contains('mine')) {
         cell.classList.add('mine');
-        cell.style.animation = 'explode 0.5s ease forwards'; // Animação de explosão
         setTimeout(() => {
             alert(`Você perdeu! Você encontrou uma mina!`);
             resetGame();
         }, 500);
     } else {
-        // O jogador não encontrou mina, continua
         if (revealedCells === totalCells - minesSelected) {
-            cell.classList.add('safe');
             setTimeout(() => {
                 alert(`Você ganhou! Seu prêmio é: ${multiplier * 10} créditos`);
                 resetGame();
@@ -81,8 +86,3 @@ function resetGame() {
     document.querySelector('.intro').style.display = 'block';
     document.querySelector('.grid').innerHTML = '';
 }
-
-document.getElementById('cashOutBtn').addEventListener('click', () => {
-    alert(`Você sacou seu prêmio de: ${multiplier * 10} créditos`);
-    resetGame();
-});
